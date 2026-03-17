@@ -1,6 +1,45 @@
-
- <main class="categoriepagina">
+<main class="categoriepagina">
   <section class="container">
+
+   
+    <section class="chatbot">
+      <section class="chat-window">
+        <p class="message bot">Hallo! Waar kan ik je mee helpen?</p>
+        <p class="message user">Ik heb een vraag.</p>
+      </section>
+
+      <section class="chat-input">
+        <form>
+          <input type="text" placeholder="Ik ben op zoek naar een cadeau voor..." />
+          <button type="submit"><img src="assets/sendicon.svg" alt="Verstuur bericht"></button>
+        </form>
+      </section>
+    
+
+
+<section class="search-bar-sidebar"> 
+<form action="/" method="get">
+<section class="filter-card">
+
+<h2>Price range (€)</h2>
+<button type="submit" name="price" value="10">Under €10</button>
+<button type="submit" name="price" value="25">Under €25</button>
+<button type="submit" name="price" value="50">Under €50</button>
+</section>
+
+<section class="filter-card">
+<h2>Have vs Do</h2>
+<button type="submit" name="type" value="have">Have</button>
+<button type="submit" name="type" value="do">Do</button>
+</section>
+
+<section class="filter-card">
+<h2>Traditional vs Experimental</h2>
+<button type="submit" name="style" value="traditional">Traditional</button>
+<button type="submit" name="style" value="experimental">Experimental</button>
+</form>
+</section>
+
 
     <section class="product-grid">
       {% for product in products %}
@@ -28,6 +67,7 @@
       {% endfor %}
     </section>
 
+  </section>
 </main>
 
 <footer>
