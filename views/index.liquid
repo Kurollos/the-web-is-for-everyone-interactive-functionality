@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milledoni Cadeaus</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- =====================
+       Header
+  ===================== -->
   <header class="site-header">
     <section class="container">
-      <a href="/" class="logo"></a>      
-      <h1><img src="{{ 'milledoni.png' | assets_url }}" alt="Milledoni"></h1>   
-      <link rel="stylesheet" href="/style.css">
+      <a href="/" class="logo">
+        <img src="{{ 'milledoni.png' | assets_url }}" alt="Milledoni">
+      </a>      
       <nav class="main-nav">
         <ul>
           <li><a href="/cadeaus">Cadeaus</a></li>
@@ -15,91 +26,106 @@
     </section>
   </header>
 
-<main class="categoriepagina">
-  <section class="container">
+  <!-- =====================
+       Main content
+  ===================== -->
+  <main class="categoriepagina">
+    <section class="container">
 
-   
-    <section class="chatbot">
-      <section class="chat-window">
-        <p class="message bot">Hallo! Waar kan ik je mee helpen?</p>
-        <p class="message user">Ik heb een vraag.</p>
+      <!-- Sidebar links -->
+      <div class="sidebar">
+
+        <!-- Chatbot -->
+        <section class="chatbot">
+          <section class="chat-window">
+            <p class="message bot">Hallo! Waar kan ik je mee helpen?</p>
+            <p class="message user">Ik heb een vraag.</p>
+          </section>
+
+          <section class="chat-input">
+            <form>
+              <input type="text" placeholder="Ik ben op zoek naar een cadeau voor..." />
+              <button type="submit"><img src="assets/sendicon.svg" alt="Verstuur bericht"></button>
+            </form>
+          </section>
+        </section>
+
+        <!-- Search en filters -->
+        <section class="search-bar-sidebar">
+          <form action="/" method="get">
+
+            <section class="filter-card">
+              <h2>Price range (€)</h2>
+              <button type="submit" name="price" value="10">Under €10</button>
+              <button type="submit" name="price" value="25">Under €25</button>
+              <button type="submit" name="price" value="50">Under €50</button>
+            </section>
+
+            <section class="filter-card">
+              <h2>Have vs Do</h2>
+              <button type="submit" name="type" value="have">Have</button>
+              <button type="submit" name="type" value="do">Do</button>
+            </section>
+
+            <section class="filter-card">
+              <h2>Traditional vs Experimental</h2>
+              <button type="submit" name="style" value="traditional">Traditional</button>
+              <button type="submit" name="style" value="experimental">Experimental</button>
+            </section>
+
+          </form>
+        </section>
+
+      </div>
+
+      <!-- Producten rechts -->
+      <section class="product-grid">
+        {% for product in products %}
+          <article class="product-card">
+            <section class="product-image">
+              <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
+            </section>
+            <section class="product-info">
+              <h2>{{ product.name }}</h2>
+              <p class="prijs">€{{ product.amount }}</p>
+              <p class="shop">
+                Shop: <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
+              </p>
+              <p class="spotter">
+                Spotter:
+                {% if product.spotter_img %}
+                  <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
+                {% endif %}
+                {{ product.spotter }}
+              </p>
+              <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
+            </section>
+          </article>
+        {% endfor %}
       </section>
 
-      <section class="chat-input">
-        <form>
-          <input type="text" placeholder="Ik ben op zoek naar een cadeau voor..." />
-          <button type="submit"><img src="assets/sendicon.svg" alt="Verstuur bericht"></button>
-        </form>
-      </section>
-    
-
-
-<section class="search-bar-sidebar"> 
-<form action="/" method="get">
-<section class="filter-card">
-
-<h2>Price range (€)</h2>
-<button type="submit" name="price" value="10">Under €10</button>
-<button type="submit" name="price" value="25">Under €25</button>
-<button type="submit" name="price" value="50">Under €50</button>
-</section>
-
-<section class="filter-card">
-<h2>Have vs Do</h2>
-<button type="submit" name="type" value="have">Have</button>
-<button type="submit" name="type" value="do">Do</button>
-</section>
-
-<section class="filter-card">
-<h2>Traditional vs Experimental</h2>
-<button type="submit" name="style" value="traditional">Traditional</button>
-<button type="submit" name="style" value="experimental">Experimental</button>
-</form>
-</section>
-
-
-    <section class="product-grid">
-      {% for product in products %}
-        <article class="product-card">
-          <section class="product-image">
-            <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
-          </section>
-          <section class="product-info">
-            <h2>{{ product.name }}</h2>
-            <p class="prijs">€{{ product.amount }}</p>
-            <p class="shop">
-              Shop:
-              <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
-            </p>
-            <p class="spotter">
-              Spotter:
-              {% if product.spotter_img %}
-                <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
-              {% endif %}
-              {{ product.spotter }}
-            </p>
-            <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
-          </section>
-        </article>
-      {% endfor %}
     </section>
+  </main>
 
-  </section>
-</main>
+  <!-- =====================
+       Footer
+  ===================== -->
+  <footer>
+    <h3>Milledoni</h3>
+    <p>Unieke cadeaus voor speciale momenten.</p>
 
-<footer>
-  <h3>Milledoni</h3>
-  <p>Unieke cadeaus voor speciale momenten.</p>
+    <h3>Contact</h3>
+    <p>Email: info@milledoni.nl</p>
 
-  <h3>Contact</h3>
-  <p>Email: info@milledoni.nl</p>
+    <h3>Volg ons</h3>
+    <p>
+      <a href="#">Instagram</a> |
+      <a href="#">Facebook</a> |
+      <a href="#">TikTok</a>
+    </p>
 
-  <h3>Volg ons</h3>
-  <p>
-    <a href="#">Instagram</a> |
-    <a href="#">Facebook</a> |
-    <a href="#">TikTok</a>
-  </p>
+    <p>© 2026 Milledoni. Alle rechten voorbehouden.</p>
+  </footer>
 
-  <p>© 2026 Milledoni. Alle rechten voorbehouden.</p>
-</footer>
+</body>
+</html>
