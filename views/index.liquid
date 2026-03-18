@@ -78,32 +78,43 @@
 
       </div>
 
-      <!-- Producten rechts -->
-      <section class="product-grid">
-        {% for product in products %}
-          <article class="product-card">
-            <section class="product-image">
-              <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
-            </section>
-            <section class="product-info">
-              <h2>{{ product.name }}</h2>
-              <p class="prijs">€{{ product.amount }}</p>
-              <p class="shop">
-                Shop: <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
-              </p>
-              <p class="spotter">
-                Spotter:
-                {% if product.spotter_img %}
-                  <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
-                {% endif %}
-                {{ product.spotter }}
-              </p>
-              <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
-            </section>
-          </article>
-        {% endfor %}
+  <!-- Producten rechts -->
+<section class="product-grid">
+  {% for product in products %}
+    <article class="product-card">
+      <section class="product-image">
+        <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
       </section>
 
+      <section class="product-info">
+        <h2>{{ product.name }}</h2>
+        <p class="prijs">€{{ product.amount }}</p>
+        <p class="shop">
+          Shop: <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
+        </p>
+        <p class="spotter">
+          Spotter:
+          {% if product.spotter_img %}
+            <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
+          {% endif %}
+          {{ product.spotter }}
+        </p>
+
+        <!-- Bekijk product knop -->
+        <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
+
+        <!-- Thumbs-up knop direct onder de Bekijk product knop -->
+        <div class="like-container">
+          <button class="thumbs-button" data-product-id="{{ product.id }}">
+            👍 <span class="thumbs-count">0</span>
+          </button>
+        </div>
+
+      </section>
+    </article>
+  {% endfor %}
+</section>
+      
     </section>
   </main>
 
