@@ -228,6 +228,31 @@ body {
 }
 
 /* =====================
+   Button
+===================== */
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: gray;
+  font-size: 16px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.like-button.liked {
+  color: green;
+}
+
+.like-button:hover {
+  background: #f0f0f0;
+}
+
+/* =====================
    Footer
 ===================== */
 footer {
