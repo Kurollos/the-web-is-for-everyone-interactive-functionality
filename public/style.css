@@ -227,14 +227,17 @@ body {
   background-color: #e0b838;
 }
 
-/* =====================
-   Button
-===================== */
+/* ===================== */
+/* Thumbs-up like button */
+/* ===================== */
+.like-container {
+  margin-top: 10px; /* Ruimte onder de Bekijk product knop */
+}
 
-.like-button {
+.thumbs-button {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 30px;
   color: gray;
   font-size: 16px;
   padding: 5px 10px;
@@ -242,16 +245,22 @@ body {
   border-radius: 5px;
   background: white;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
-.like-button.liked {
-  color: green;
+.thumbs-button:hover {
+  background-color: #f0f0f0;
 }
 
-.like-button:hover {
-  background: #f0f0f0;
+.thumbs-button.liked {
+  color: #007bff;
+  border-color: #007bff;
+  background-color: #e6f0ff;
 }
 
+.thumbs-count {
+  font-weight: bold;
+}
 /* =====================
    Footer
 ===================== */
