@@ -44,11 +44,18 @@ app.get('/', async function (request, response) {
 // POST ROUTE (like)
 // =========================
 app.post('/like', async function (request, response) {
-
-  console.log(request.body)
+  console.log('Body ontvangen:', request.body)
 
   const userId = request.body.user_id
   const productId = request.body.product_id
+
+  // Validatie
+  if (!userId || !productId) {
+    return response.status(400).json({
+      success: false,
+      error: 'user_id en product_id zijn verplicht'
+    })
+  }
 
   try {
     const fetchResponse = await fetch(
@@ -57,23 +64,33 @@ app.post('/like', async function (request, response) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=UTF-8'
+          // voeg eventueel je token toe als auth nodig is
+          // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
         },
         body: JSON.stringify({
-          milledoni_users_id: userId,
-          milledoni_products_id: productId
+          milledoni_users_id: userId,     // correct veld
+          milledoni_products_id: productId // correct veld
         })
       }
     )
 
     const fetchResponseJSON = await fetchResponse.json()
-    console.log(fetchResponseJSON)
+    console.log('Directus response:', fetchResponseJSON)
+
+    // Response terug naar frontend
+    response.json({
+      success: true,
+      data: fetchResponseJSON
+    })
 
   } catch (error) {
-    console.error('Fout bij POST:', error)
-  }
+    console.error('Fout bij POST naar Directus:', error)
 
-  // Redirect terug naar homepage
-  response.redirect(303, '/')
+    response.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
 })
 
 // =========================
