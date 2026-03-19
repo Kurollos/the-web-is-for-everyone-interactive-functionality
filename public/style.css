@@ -21,246 +21,277 @@ body {
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
   padding: 15px 0;
-}
 
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
 
-.site-header .logo img {
-  height: 50px;
-}
+    @media (max-width: 576px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
 
-.site-header h1 img {
-  height: 40px;
-}
+  .logo img {
+    height: 50px;
+  }
 
-.site-header .main-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
+  h1 img {
+    height: 40px;
+  }
 
-.site-header .main-nav a {
-  text-decoration: none;
-  color: #222;
-  font-weight: 500;
-}
+  .main-nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
 
-.site-header .main-nav a:hover {
-  color: #f4c542;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 500;
+
+      &:hover {
+        color: #f4c542;
+      }
+    }
+  }
 }
 
 /* =====================
    Layout container voor main
 ===================== */
-.categoriepagina .container {
-  display: grid;
-  grid-template-columns: 300px 1fr; /* Sidebar links, content rechts */
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.categoriepagina {
+  .container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+
+    @media (max-width: 576px) {
+      padding: 10px;
+    }
+  }
+
+  /* =====================
+     Sidebar links
+  ===================== */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @media (max-width: 992px) {
+      order: -1;
+    }
+
+    .search-bar-sidebar,
+    .chatbot,
+    .filter-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .chat-window {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+
+      .message {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        max-width: 80%;
+
+        &.bot {
+          background-color: #f0f0f0;
+          align-self: flex-start;
+        }
+
+        &.user {
+          background-color: #f4c542;
+          color: #fff;
+          align-self: flex-end;
+        }
+      }
+    }
+
+    .chat-input {
+      form {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+
+        input {
+          flex: 1;
+          padding: 10px 15px;
+          border-radius: 25px;
+          border: 1px solid #ccc;
+        }
+
+        button {
+          background-color: #f4c542;
+          border: none;
+          padding: 0 15px;
+          border-radius: 25px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .filter-card {
+      h2 {
+        margin-bottom: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      button {
+        background-color: #f0f0f0;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 20px;
+        margin: 5px 5px 0 0;
+        cursor: pointer;
+        font-size: 0.9rem;
+
+        &:hover {
+          background-color: #f4c542;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  /* =====================
+     Product grid rechts
+  ===================== */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .product-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    .product-image img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      h2 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .prijs {
+        color: #f4c542;
+        font-weight: bold;
+      }
+
+      .shop a {
+        text-decoration: none;
+        color: #222;
+      }
+
+      .spotter img {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+
+      .button {
+        margin-top: auto;
+        background-color: #f4c542;
+        color: #fff;
+        border-radius: 25px;
+        text-align: center;
+        padding: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #e0b838;
+        }
+      }
+    }
+  }
+
+  /* =====================
+     Thumbs-up like button
+  ===================== */
+  .like-container {
+    margin-top: 10px;
+
+    .thumbs-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: gray;
+      font-size: 16px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
+
+      &.liked {
+        color: #007bff;
+        border-color: #007bff;
+        background-color: #e6f0ff;
+      }
+
+      .thumbs-count {
+        font-weight: bold;
+      }
+    }
+  }
 }
 
-/* =====================
-   Sidebar links: search, chat, filters
-===================== */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.search-bar-sidebar,
-.chatbot,
-.filter-card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-/* Chat window */
-.chat-window {
-  max-height: 300px;
-  overflow-y: auto;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-.message {
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 20px;
-  max-width: 80%;
-}
-
-.message.bot {
-  background-color: #f0f0f0;
-  align-self: flex-start;
-}
-
-.message.user {
-  background-color: #f4c542;
-  color: #fff;
-  align-self: flex-end;
-}
-
-/* Chat input */
-.chat-input form {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-}
-
-.chat-input button {
-  background-color: #f4c542;
-  border: none;
-  padding: 0 15px;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-/* =====================
-   Filters
-===================== */
-.filter-card h2 {
-  margin-bottom: 10px;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.filter-card button {
-  background-color: #f0f0f0;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 20px;
-  margin: 5px 5px 0 0;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.filter-card button:hover {
-  background-color: #f4c542;
-  color: #fff;
-}
-
-/* =====================
-   Product grid rechts
-===================== */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.product-card {
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.product-image img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.product-info {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.product-info h2 {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.product-info .prijs {
-  color: #f4c542;
-  font-weight: bold;
-}
-
-.product-info .shop a {
-  text-decoration: none;
-  color: #222;
-}
-
-.product-info .spotter img {
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-
-.product-info .button {
-  margin-top: auto;
-  background-color: #f4c542;
-  color: #fff;
-  border-radius: 25px;
-  text-align: center;
-  padding: 10px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.product-info .button:hover {
-  background-color: #e0b838;
-}
-
-/* ===================== */
-/* Thumbs-up like button */
-/* ===================== */
-.like-container {
-  margin-top: 10px; /* Ruimte onder de Bekijk product knop */
-}
-
-.thumbs-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 30px;
-  color: gray;
-  font-size: 16px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.thumbs-button:hover {
-  background-color: #f0f0f0;
-}
-
-.thumbs-button.liked {
-  color: #007bff;
-  border-color: #007bff;
-  background-color: #e6f0ff;
-}
-
-.thumbs-count {
-  font-weight: bold;
-}
 /* =====================
    Footer
 ===================== */
@@ -269,23 +300,27 @@ footer {
   color: #fff;
   padding: 30px 0;
   text-align: center;
-}
 
-footer a {
-  color: #f4c542;
-  text-decoration: none;
-}
+  a {
+    color: #f4c542;
+    text-decoration: none;
 
-footer a:hover {
-  text-decoration: underline;
-}
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
-footer h3 {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
+  h3 {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
 
-footer p {
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  p {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 576px) {
+    text-align: center;
+  }
 }
