@@ -9,6 +9,7 @@ const app = express()
 
 // Form data verwerken
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json()) // belangrijk voor JSON POST via fetch
 
 // Static files
 app.use(express.static('public'))
@@ -21,75 +22,89 @@ app.set('views', './views')
 // =========================
 // GET ROUTE (producten)
 // =========================
-app.get('/', async function (request, response) {
+app.get('/', async function (req, res) {
+  const userId = 62; // jouw user ID
 
-  const params = {
-    fields: 'id,name,image'
+  try {
+    // Haal alle producten
+    const productResponse = await fetch(
+      'https://fdnd-agency.directus.app/items/milledoni_products/?fields=id,name,image'
+    )
+    const products = (await productResponse.json()).data
+
+    // Haal wishlist van gebruiker
+    const userResponse = await fetch(
+      `https://fdnd-agency.directus.app/items/milledoni_users/${userId}/?fields=liked_products.milledoni_products_id.id`
+    )
+    const likedProducts = (await userResponse.json()).data.liked_products.map(
+      item => item.milledoni_products_id.id
+    )
+
+    res.render('index.liquid', { products, likedProducts })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Er is iets misgegaan bij het laden van producten")
   }
-
-  const productResponse = await fetch(
-    'https://fdnd-agency.directus.app/items/milledoni_products/?' + new URLSearchParams(params)
-  )
-
-  const productResponseJSON = await productResponse.json()
-
-  console.log(productResponseJSON.data)
-
-  response.render('index.liquid', {
-    products: productResponseJSON.data
-  })
 })
 
 // =========================
 // POST ROUTE (like)
 // =========================
-app.post('/like', async function (request, response) {
-  console.log('Body ontvangen:', request.body)
-
-  const userId = request.body.user_id
-  const productId = request.body.product_id
-
-  // Validatie
-  if (!userId || !productId) {
-    return response.status(400).json({
-      success: false,
-      error: 'user_id en product_id zijn verplicht'
-    })
-  }
+app.post('/like', async function (req, res) {
+  const userId = 62 // jouw user ID
+  const productId = req.body.product_id || req.body.id
 
   try {
+    // Check of product al in wishlist staat
+    const checkResponse = await fetch(
+      `https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1?filter[milledoni_users_id][_eq]=${userId}&filter[milledoni_products_id][_eq]=${productId}`
+    )
+    const checkData = await checkResponse.json()
+
+    if (checkData.data.length > 0) {
+      return res.json({ success: false, message: "Product staat al in wishlist" })
+    }
+
+    // Voeg toe aan wishlist
     const fetchResponse = await fetch(
-      'https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1',
+      "https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1",
       {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-          // voeg eventueel je token toe als auth nodig is
-          // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN'
-        },
+        method: "POST",
         body: JSON.stringify({
-          milledoni_users_id: userId,     // correct veld
-          milledoni_products_id: productId // correct veld
-        })
+          milledoni_users_id: userId,
+          milledoni_products_id: productId,
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+        },
       }
     )
-
     const fetchResponseJSON = await fetchResponse.json()
-    console.log('Directus response:', fetchResponseJSON)
 
-    // Response terug naar frontend
-    response.json({
-      success: true,
-      data: fetchResponseJSON
-    })
+    res.json({ success: true, message: "Product toegevoegd aan wishlist", data: fetchResponseJSON })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ success: false, message: "Er is iets misgegaan bij toevoegen aan wishlist" })
+  }
+})
 
-  } catch (error) {
-    console.error('Fout bij POST naar Directus:', error)
+app.get('/wishlist', async function (req, res) {
+  const userId = 62; // jouw user ID
 
-    response.status(500).json({
-      success: false,
-      error: error.message
-    })
+  try {
+    // Haal de wishlist van de gebruiker op
+    const userResponse = await fetch(
+      `https://fdnd-agency.directus.app/items/milledoni_users/${userId}/?fields=liked_products.milledoni_products_id.*`
+    )
+    const likedProducts = (await userResponse.json()).data.liked_products.map(
+      item => item.milledoni_products_id
+    )
+
+    // Render list.liquid met de wishlist
+    res.render('wishlist.liquid', { likedProducts })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send("Er is iets misgegaan bij het ophalen van je wishlist")
   }
 })
 
