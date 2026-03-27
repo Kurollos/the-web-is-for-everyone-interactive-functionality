@@ -158,6 +158,9 @@ body {
       }
     }
 
+    /* =====================
+       Filter Card Styling
+    ===================== */
     .filter-card {
       h2 {
         margin-bottom: 10px;
@@ -165,6 +168,7 @@ body {
         font-weight: 600;
       }
 
+      /* Standaard filter-buttons (optioneel) */
       button {
         background-color: #f0f0f0;
         border: none;
@@ -178,6 +182,48 @@ body {
           background-color: #f4c542;
           color: #fff;
         }
+      }
+
+      /* =====================
+         Customizable Filter Form
+      ===================== */
+      #filterForm {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fafafa;
+        font-size: 0.95rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      select:hover,
+      select:focus {
+        border-color: #f4c542;
+        box-shadow: 0 0 5px rgba(244,197,66,0.3);
+        outline: none;
+      }
+
+      #filterForm button[type="submit"] {
+        background-color: #f4c542;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+      }
+
+      #filterForm button[type="submit"]:hover {
+        background-color: #e0b838;
+        transform: translateY(-2px);
       }
     }
   }
