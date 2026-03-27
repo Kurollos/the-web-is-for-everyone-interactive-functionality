@@ -1,0 +1,16 @@
+<h1>Mijn Wishlist</h1>
+<link rel="stylesheet" href="/style.css">
+
+{% if likedProducts.size > 0 %}
+  <div id="wishlist">
+    {% for product in likedProducts %}
+      <div class="product-card" id="wishlist-product-{{ product.id }}">
+        <img src="{{ product.image }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p>€{{ product.amount }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Je hebt nog geen producten in je wishlist.</p>
+{% endif %}
