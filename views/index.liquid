@@ -8,148 +8,139 @@
 </head>
 <body>
 
-  <!-- =====================
-       Header
-  ===================== -->
-  <header class="site-header">
-    <section class="container">
-      <a href="/" class="logo">
-        <img src="{{ 'milledoni.png' | assets_url }}" alt="Milledoni">
-      </a>      
-      <nav class="main-nav">
-        <ul>
-          <li><a href="/cadeaus">Cadeaus</a></li>
-          <li><a href="/categorieën">Categorieën</a></li>
-          <li><a href="/wishlist">Wishlist</a></li>
-        </ul>
-      </nav>
-    </section>
-  </header>
+<header class="site-header">
+  <section class="container">
+    <a href="/" class="logo">
+      <img src="{{ 'milledoni.png' | assets_url }}" alt="Milledoni">
+    </a>      
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/cadeaus">Cadeaus</a></li>
+        <li><a href="/categorieën">Categorieën</a></li>
+        <li><a href="/wishlist">Wishlist</a></li>
+      </ul>
+    </nav>
+  </section>
+</header>
 
-  <!-- =====================
-       Main content
-  ===================== -->
-  <main class="categoriepagina">
-    <section class="container">
+<main class="categoriepagina">
+  <section class="container">
 
-      <!-- Sidebar links -->
-      <div class="sidebar">
+    <!-- Sidebar -->
+    <div class="sidebar">
 
-        <!-- Chatbot -->
-        <section class="chatbot">
-          <section class="chat-window">
-            <p class="message bot">Hallo! Waar kan ik je mee helpen?</p>
-            <p class="message user">Ik heb een vraag.</p>
-          </section>
-
-          <section class="chat-input">
-            <form>
-              <input type="text" placeholder="Ik ben op zoek naar een cadeau voor..." />
-              <button type="submit"><img src="assets/sendicon.svg" alt="Verstuur bericht"></button>
-            </form>
-          </section>
+      <!-- Chatbot -->
+      <section class="chatbot">
+        <section class="chat-window">
+          <p class="message bot">Hallo! Waar kan ik je mee helpen?</p>
+          <p class="message user">Ik heb een vraag.</p>
         </section>
 
-<form id="filterForm" action="/" method="get">
-
-  <section class="filter-card">
-    <h2>Price range (€)</h2>
-    <select name="price" id="priceSelect">
-      <option value="">All</option>
-      <option value="10">Under €10</option>
-      <option value="25">Under €25</option>
-      <option value="50">Under €50</option>
-    </select>
-  </section>
-
-  <section class="filter-card">
-    <h2>Shop</h2>
-    <select name="shop" id="shopSelect">
-      <option value="">All</option>
-      <option value="Rijksmuseum">Rijksmuseum</option>
-      <option value="Winkel B">Winkel B</option>
-      <!-- voeg hier meer shops toe -->
-    </select>
-  </section>
-
-  <section class="filter-card">
-    <h2>Spotter</h2>
-    <select name="spotter" id="spotterSelect">
-      <option value="">All</option>
-      <option value="Jente">Jente</option>
-      <option value="Petra">Petra</option>
-      <!-- voeg hier meer spotters toe -->
-    </select>
-  </section>
-
-  <button type="submit">Apply Filters</button>
-</form>
-
-      </div>
-
-  <!-- Producten rechts -->
-<section class="product-grid">
-  {% for product in products %}
-    <article class="product-card">
-      <section class="product-image">
-        <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
+        <section class="chat-input">
+          <form>
+            <input type="text" placeholder="Ik ben op zoek naar een cadeau voor..." />
+            <button type="submit"><img src="" alt=""></button>
+          </form>
+        </section>
       </section>
 
-     <!-- Thumbs-up knop direct onder de Bekijk product knop -->
-        <form action="/like" method="POST">
-    <input type="hidden" name="user_id" value="1">
-    <input type="hidden" name="product_id" value="{{ product.id }}">
-    
-    <button class="save-button" type="submit" name="id" value="{{ product.id }}">
-        <img class="button.png" src="/assets/button.png" alt="">
-    </button>
-</form>
+      <!-- FILTER FORM -->
+      <form id="filterForm" action="/" method="get">
 
-      <section class="product-info">
-        <h2>{{ product.name }}</h2>
-        <p class="prijs">€{{ product.amount }}</p>
-        <p class="shop">
-          Shop: <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
-        </p>
-        <p class="spotter">
-          Spotter:
-          {% if product.spotter_img %}
-            <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
-          {% endif %}
-          {{ product.spotter }}
-        </p>
+        <section class="filter-card">
+          <h2>Price range (€)</h2>
+          <select name="price">
+            <option value="">All</option>
+            <option value="10">Under €10</option>
+            <option value="25">Under €25</option>
+            <option value="50">Under €50</option>
+          </select>
+        </section>
 
-        <!-- Bekijk product knop -->
-        <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
+        <section class="filter-card">
+          <h2>Shop</h2>
+          <select name="shop">
+            <option value="">All</option>
+            <option value="Rijksmuseum">Rijksmuseum</option>
+            <option value="Winkel B">Winkel B</option>
+          </select>
+        </section>
 
+        <section class="filter-card">
+          <h2>Spotter</h2>
+          <select name="spotter">
+            <option value="">All</option>
+            <option value="Jente">Jente</option>
+            <option value="Petra">Petra</option>
+          </select>
+        </section>
 
-      </section>
-    </article>
-  {% endfor %}
-</section>
-      
+        <button type="submit">Apply Filters</button>
+      </form> <!-- ✅ DIT WAS DE BELANGRIJKSTE FIX -->
+
+    </div>
+
+    <!-- PRODUCTEN -->
+    <section class="product-grid">
+      {% for product in products %}
+        <article class="product-card">
+
+          <section class="product-image">
+            <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
+
+            <!-- Save button -->
+            <form action="/like" method="POST" class="save-form">
+              <input type="hidden" name="user_id" value="">
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              
+              <button class="save-button" type="submit">
+                <img class="save-icon" src="/assets/button.png" alt="save">
+              </button>
+            </form>
+          </section>
+
+          <section class="product-info">
+            <h2>{{ product.name }}</h2>
+            <p class="prijs">€{{ product.amount }}</p>
+
+            <p class="shop">
+              Shop: <a href="{{ product.shop_url }}" target="_blank">{{ product.shop_name }}</a>
+            </p>
+
+            <p class="spotter">
+              Spotter:
+              {% if product.spotter_img %}
+                <img src="{{ product.spotter_img }}" alt="{{ product.spotter }}">
+              {% endif %}
+              {{ product.spotter }}
+            </p>
+
+            <a href="/product/{{ product.slug }}" class="button">Bekijk product</a>
+          </section>
+
+        </article>
+      {% endfor %}
     </section>
-  </main>
 
-  <!-- =====================
-       Footer
-  ===================== -->
-  <footer>
-    <h3>Milledoni</h3>
-    <p>Unieke cadeaus voor speciale momenten.</p>
+  </section>
+</main>
 
-    <h3>Contact</h3>
-    <p>Email: info@milledoni.nl</p>
+<footer>
+  <h3>Milledoni</h3>
+  <p>Unieke cadeaus voor speciale momenten.</p>
 
-    <h3>Volg ons</h3>
-    <p>
-      <a href="#">Instagram</a> |
-      <a href="#">Facebook</a> |
-      <a href="#">TikTok</a>
-    </p>
+  <h3>Contact</h3>
+  <p>Email: info@milledoni.nl</p>
 
-    <p>© 2026 Milledoni. Alle rechten voorbehouden.</p>
-  </footer>
+  <h3>Volg ons</h3>
+  <p>
+    <a href="#">Instagram</a> |
+    <a href="#">Facebook</a> |
+    <a href="#">TikTok</a>
+  </p>
+
+  <p>© 2026 Milledoni. Alle rechten voorbehouden.</p>
+</footer>
 
 </body>
 </html>
