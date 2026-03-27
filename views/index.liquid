@@ -50,31 +50,40 @@
           </section>
         </section>
 
-        <!-- Search en filters -->
-        <section class="search-bar-sidebar">
-          <form action="/" method="get">
+<form id="filterForm" action="/" method="get">
 
-            <section class="filter-card">
-              <h2>Price range (€)</h2>
-              <button type="submit" name="price" value="10">Under €10</button>
-              <button type="submit" name="price" value="25">Under €25</button>
-              <button type="submit" name="price" value="50">Under €50</button>
-            </section>
+  <section class="filter-card">
+    <h2>Price range (€)</h2>
+    <select name="price" id="priceSelect">
+      <option value="">All</option>
+      <option value="10">Under €10</option>
+      <option value="25">Under €25</option>
+      <option value="50">Under €50</option>
+    </select>
+  </section>
 
-            <section class="filter-card">
-              <h2>Have vs Do</h2>
-              <button type="submit" name="type" value="have">Have</button>
-              <button type="submit" name="type" value="do">Do</button>
-            </section>
+  <section class="filter-card">
+    <h2>Shop</h2>
+    <select name="shop" id="shopSelect">
+      <option value="">All</option>
+      <option value="Rijksmuseum">Rijksmuseum</option>
+      <option value="Winkel B">Winkel B</option>
+      <!-- voeg hier meer shops toe -->
+    </select>
+  </section>
 
-            <section class="filter-card">
-              <h2>Traditional vs Experimental</h2>
-              <button type="submit" name="style" value="traditional">Traditional</button>
-              <button type="submit" name="style" value="experimental">Experimental</button>
-            </section>
+  <section class="filter-card">
+    <h2>Spotter</h2>
+    <select name="spotter" id="spotterSelect">
+      <option value="">All</option>
+      <option value="Jente">Jente</option>
+      <option value="Petra">Petra</option>
+      <!-- voeg hier meer spotters toe -->
+    </select>
+  </section>
 
-          </form>
-        </section>
+  <button type="submit">Apply Filters</button>
+</form>
 
       </div>
 
@@ -85,13 +94,6 @@
       <section class="product-image">
         <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
       </section>
-
-     <!-- Thumbs-up knop direct onder de Bekijk product knop -->
-        <form action="/like" method="POST">
-        <input type="hidden" name="user_id" value="1">
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <button type="submit">👍 Like</button>
-        </form>
 
         
 
