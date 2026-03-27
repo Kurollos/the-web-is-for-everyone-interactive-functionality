@@ -95,7 +95,15 @@
         <img src="{{ product.img | default: product.image }}" alt="{{ product.name }}">
       </section>
 
-        
+     <!-- Thumbs-up knop direct onder de Bekijk product knop -->
+        <form action="/like" method="POST">
+    <input type="hidden" name="user_id" value="1">
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    
+    <button class="save-button" type="submit" name="id" value="{{ product.id }}">
+        <img class="button.png" src="/assets/button.png" alt="">
+    </button>
+</form>
 
       <section class="product-info">
         <h2>{{ product.name }}</h2>
