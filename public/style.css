@@ -360,6 +360,55 @@ body {
   height: 30px;
 }
 
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --header-bg: #ffffff;
+  --sidebar-bg: #eeeeee;
+  --card-bg: #ffffff;
+  --button-bg: #dddddd;
+  --button-text: #222222;
+}
+
+html.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --header-bg: #1a1a1a;
+  --sidebar-bg: #1c1c1c;
+  --card-bg: #1e1e1e;
+  --button-bg: #333333;
+  --button-text: #f1f1f1;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.site-header {
+  background-color: var(--header-bg);
+}
+
+.sidebar {
+  background-color: var(--sidebar-bg);
+}
+
+.product-card {
+  background-color: var(--card-bg);
+  transition: background-color 0.3s;
+}
+
+#theme-toggle {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
 /* =====================
    Footer
 ===================== */
