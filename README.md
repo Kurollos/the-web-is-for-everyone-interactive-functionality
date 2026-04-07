@@ -15,16 +15,28 @@ De instructie vind je in: [INSTRUCTIONS.md](https://github.com/fdnd-task/the-web
   * [Licentie](#licentie)
 
 ## Beschrijving
-Wat ik heb gemaakt bij mijn milledoni cadeau categoriepagina is een post interactie waarbij gebruikers een cadeau kunnen toevoegen aan hun favorietenlijst door op een like button te klikken.
+Voor de cadeau categoriepagina van Milledoni heb ik een post-interactie ontwikkeld waarmee gebruikers cadeaus kunnen toevoegen aan hun favorietenlijst. Dit gebeurt door op een like-button te klikken bij een product.
 
 ## Gebruik
- hoe de interactie werkt is je bent bij de cadeau categoriepagina van milledoni en je ziet de cadeau's en je wilt kiezen welke je leuk vindt en je vindt eentje leuk zo je klikt op de like button en zodra je er op klikt dan verschijnt er een popup waar er staat successful je product staat nu in de lijst en dan zodra je naar de lijst gaat zie je de product in de lijst staan.
+Wanneer een gebruiker zich op de cadeau categoriepagina bevindt, ziet hij een overzicht van cadeaus. Als de gebruiker een cadeau leuk vindt, kan hij op de like-button klikken.
+
+Na het klikken wordt het product toegevoegd aan de favorietenlijst
+Er verschijnt een popup met een bevestiging dat het product succesvol is opgeslagen
+Wanneer de gebruiker naar de wishlist-pagina gaat, ziet hij daar het opgeslagen product terug
 
 ## Kenmerken
- de techineken die ik heb gebruikt tijdens het maken waren een save button bij mijn index.liquid onder de producten zodat ze in de cadeaukaarten staan en daarna heb ik bij server.js een post interactie gemaakt waarin wanneer je product likt dan krijg je een popup dat het gelukt is met liken en daarna heb ik een wishlist.liquid bestand aangemaakt waarin nadat het gelukt is met het posten dat de cadeau die ik heb gelikt staat er in de lijst en zo heb ik het gedaan.
+Voor het maken van deze functionaliteit heb ik de volgende technieken gebruikt:
+In index.liquid heb ik een like/save button toegevoegd bij elk product
+In server.js heb ik een POST-interactie gemaakt die het product opslaat wanneer er op de knop wordt geklikt
+Na het versturen van de POST request krijgt de gebruiker feedback via een popup
+In wishlist.liquid worden de opgeslagen producten weergegeven
 
 ## Installatie
-je moet een het npm package express importeren en die wordt geinstalleerd door npm install in de terminal te typen en dan staat independency in package.json
+Om dit project te gebruiken moet je eerst de juiste dependencies installeren.
+Installeer Express.js via npm:
+npm install
+Dit zorgt ervoor dat alle benodigde packages (zoals Express) in package.json worden geïnstalleerd
+
 ## Bronnen
 
 ## Licentie
