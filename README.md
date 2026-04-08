@@ -31,6 +31,20 @@ In server.js heb ik een POST-interactie gemaakt die het product opslaat wanneer 
 Na het versturen van de POST request krijgt de gebruiker feedback via een popup
 In wishlist.liquid worden de opgeslagen producten weergegeven
 
+## Progressive Enhancement & Ontwerpkeuzes
+
+Bij het maken van deze feature heb ik rekening gehouden met Progressive Enhancement.
+Dit betekent dat de functionaliteit in lagen is opgebouwd:
+
+Zonder JavaScript:
+De like-button werkt als een formulier dat een POST request naar de server stuurt. Het product wordt opgeslagen en de gebruiker kan het terugzien in de wishlist.
+Met JavaScript:
+De gebruikerservaring wordt verbeterd doordat:
+de pagina niet opnieuw hoeft te laden
+er een popup verschijnt met een bevestiging
+
+Ik heb hiervoor gekozen omdat de basisfunctionaliteit altijd blijft werken, terwijl gebruikers met moderne browsers een betere en snellere ervaring krijgen.
+
 ## Installatie
 Om dit project te gebruiken moet je eerst de juiste dependencies installeren.
 Installeer Express.js via npm:
